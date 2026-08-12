@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Urban Threads</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbrand">Urban Threads</div>
+        <div class="navlinks">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="cart.html" id="cartLink">Cart</a>
+            <a href="login.html" id="loginLink">Log In</a>
+            <span id="userDisplay"></span>
+            <button id="logoutBtn" style="display:none;">Log Out</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Shop</h1>
+        <div class="filters">
+            <button class="filterBtn active" data_category="all">All</button>
+            <button class="filterBtn" data_category="Hoodies">Hoodies</button>
+            <button class="filterBtn" data_category="T-shirts">T-shirts</button>
+            <button class="filterBtn" data_category="Sneakers">Sneakers</button>
+            <button class="filterBtn" data_category="Accessories">Accessories</button>
+        </div>
+        <div id="productGrid" class="productGrid"></div>
+    </main>
+
+    <footer class="footer">
+        <p>Urban Threads 2026. Built by Tefo Karabo Komane</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase_config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/shop.js"></script>
+</body>
+</html>

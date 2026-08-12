@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Urban Threads</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbrand">Urban Threads</div>
+        <div class="navlinks">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="cart.html" id="cartLink">Cart</a>
+            <a href="login.html" id="loginLink">Log In</a>
+            <span id="userDisplay"></span>
+            <button id="logoutBtn" style="display:none;">Log Out</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="authBox">
+            <h1 id="formTitle">Log In</h1>
+            <p id="authMessage"></p>
+
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit" class="btn">Log In</button>
+            </form>
+
+            <form id="signupForm" style="display:none;">
+                <input type="text" id="signupName" placeholder="Full Name" required>
+                <input type="email" id="signupEmail" placeholder="Email" required>
+                <input type="password" id="signupPassword" placeholder="Password" required>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+
+            <p id="authToggle" class="toggleText">Need an account? Sign Up</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Urban Threads 2026. Built by Tefo Karabo Komane</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase_config.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
