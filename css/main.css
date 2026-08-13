@@ -259,10 +259,36 @@ body {
     border-color: #ff6b35;
 }
 
+.productImageWrap {
+    position: relative;
+}
+
 .productCard img {
     width: 100%;
     height: 280px;
     object-fit: cover;
+}
+
+.wishlistBtn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #f0f0f0;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wishlistBtn.active {
+    background: #ff6b35;
+    color: #1a1a1a;
 }
 
 .productInfo {

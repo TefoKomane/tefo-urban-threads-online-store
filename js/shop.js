@@ -31,13 +31,25 @@ document.addEventListener("DOMContentLoaded", function() {
     function loadProducts(category, searchTerm) {
         productGrid.innerHTML = "<p>Loading products...</p>";
 
+        var user = auth.currentUser;
+        var wishlistPromise = user ? db.collection("users").doc(user.uid).collection("wishlist").get() : Promise.resolve({ docs: [] });
+
         var query = db.collection("products");
         if(category !== "all") {
             query = query.where("category", "==", category);
         }
 
-        query.get().then(function(snapshot) {
+        Promise.all([query.get(), wishlistPromise]).then(function(results) {
             productGrid.innerHTML = "";
+            var snapshot = results[0];
+            var wishlistSnapshot = results[1];
+            var wishlistIds = {};
+
+            if(wishlistSnapshot && wishlistSnapshot.docs) {
+                wishlistSnapshot.docs.forEach(function(doc) {
+                    wishlistIds[doc.id] = true;
+                });
+            }
 
             var filteredProducts = [];
             snapshot.forEach(function(doc) {
@@ -47,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     (product.description && product.description.toLowerCase().includes(searchTerm));
 
                 if(matchesSearch) {
-                    filteredProducts.push({ id: doc.id, product: product });
+                    filteredProducts.push({ id: doc.id, product: product, isFavorite: !!wishlistIds[doc.id] });
                 }
             });
 
@@ -63,7 +75,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 var card = document.createElement("div");
                 card.className = "productCard";
                 card.innerHTML = `
-                    <img src="${product.imageURL}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x400/333/fff?text=No+Image'">
+                    <div class="productImageWrap">
+                        <img src="${product.imageURL}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x400/333/fff?text=No+Image'">
+                        <button class="wishlistBtn ${item.isFavorite ? 'active' : ''}" data-id="${item.id}" aria-label="Add to wishlist">
+                            ${item.isFavorite ? '♥' : '♡'}
+                        </button>
+                    </div>
                     <div class="productInfo">
                         <div class="category">${product.category}</div>
                         <h3>${product.name}</h3>
@@ -82,6 +99,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 btn.addEventListener("click", function() {
                     var productId = this.getAttribute("data-id");
                     addToCart(productId);
+                });
+            });
+
+            document.querySelectorAll(".wishlistBtn").forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    toggleWishlist(this.getAttribute("data-id"), this);
                 });
             });
         }).catch(function(error) {
@@ -127,6 +150,33 @@ document.addEventListener("DOMContentLoaded", function() {
             window.updateCartCount();
         }).catch(function(error) {
             console.error("Error adding to cart:", error);
+        });
+    }
+
+    function toggleWishlist(productId, btn) {
+        var user = auth.currentUser;
+
+        if(!user) {
+            window.showToast && window.showToast("Please log in to save favourites", "error");
+            window.location.href = "login.html";
+            return;
+        }
+
+        var wishlistRef = db.collection("users").doc(user.uid).collection("wishlist").doc(productId);
+
+        wishlistRef.get().then(function(doc) {
+            if(doc.exists) {
+                return wishlistRef.delete();
+            }
+            return wishlistRef.set({
+                addedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }).then(function() {
+            var isActive = btn.classList.toggle("active");
+            btn.textContent = isActive ? "♥" : "♡";
+            window.showToast && window.showToast(isActive ? "Saved to favourites" : "Removed from favourites", "success");
+        }).catch(function(error) {
+            console.error("Error toggling wishlist:", error);
         });
     }
 
