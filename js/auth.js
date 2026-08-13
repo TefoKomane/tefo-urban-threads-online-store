@@ -70,18 +70,36 @@ document.addEventListener("DOMContentLoaded", function() {
     var logoutBtn = document.getElementById("logoutBtn");
     var loginLink = document.getElementById("loginLink");
     var cartLink = document.getElementById("cartLink");
+    var userDropdown = document.getElementById("userDropdown");
+    var userEmail = document.getElementById("userEmail");
+    var userName = document.getElementById("userName");
 
     auth.onAuthStateChanged(function(user) {
         if(user) {
-            if(userDisplay) userDisplay.textContent = user.email;
-            if(logoutBtn) logoutBtn.style.display = "inline-block";
+            // Show profile dropdown, hide login link
+            if(userDropdown) userDropdown.style.display = "inline-block";
             if(loginLink) loginLink.style.display = "none";
-            if(cartLink) cartLink.style.display = "inline-block";
+            if(cartLink) cartLink.style.display = "inline-flex";
+            
+            // Get user profile from Firestore to display name
+            db.collection("users").doc(user.uid).get().then(function(doc) {
+                if(doc.exists) {
+                    if(userName) userName.textContent = doc.data().name || user.email;
+                }
+            }).catch(function(error) {
+                console.error("Error getting user profile:", error);
+                if(userName) userName.textContent = user.email;
+            });
+            
+            // Display email in dropdown
+            if(userEmail) userEmail.textContent = user.email;
         } else {
-            if(userDisplay) userDisplay.textContent = "";
-            if(logoutBtn) logoutBtn.style.display = "none";
-            if(loginLink) loginLink.style.display = "inline-block";
+            // Hide profile dropdown, show login link
+            if(userDropdown) userDropdown.style.display = "none";
+            if(loginLink) loginLink.style.display = "inline-flex";
             if(cartLink) cartLink.style.display = "none";
+            if(userEmail) userEmail.textContent = "";
+            if(userName) userName.textContent = "";
         }
     });
 
@@ -115,6 +133,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error("Error updating cart count:", error);
             });
     };
+
+    // Dropdown toggle functionality
+    var dropdownToggle = document.querySelector(".dropdownToggle");
+    var dropdownMenu = document.querySelector(".dropdownMenu");
+    
+    if(dropdownToggle) {
+        dropdownToggle.addEventListener("click", function(e) {
+            e.stopPropagation();
+            if(dropdownMenu) {
+                dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+            }
+        });
+    }
+    
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function(e) {
+        if(!e.target.closest(".userDropdown")) {
+            if(dropdownMenu) dropdownMenu.style.display = "none";
+        }
+    });
 
     // Update cart count on page load
     auth.onAuthStateChanged(function(user) {

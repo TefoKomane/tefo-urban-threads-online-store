@@ -13,12 +13,27 @@
             <img src="images/ut-logo.png" alt="Urban Threads Logo" class="navLogo">
         </div>
         <div class="navlinks">
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="cart.html" id="cartLink">Cart <span id="cartCount" class="cartBadge">0</span></a>
-            <a href="login.html" id="loginLink">Log In</a>
-            <span id="userDisplay"></span>
-            <button id="logoutBtn" style="display:none;">Log Out</button>
+            <a href="index.html" class="navBtn">Home</a>
+            <a href="shop.html" class="navBtn">Shop</a>
+            <a href="cart.html" id="cartLink" class="navBtn">Cart <span id="cartCount" class="cartBadge">0</span></a>
+            <a href="login.html" id="loginLink" class="navBtn">Log In</a>
+        </div>
+        <div class="profileSection">
+            <div id="userDropdown" class="userDropdown" style="display:none;">
+                <div class="dropdownToggle">
+                    <svg class="profileIcon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    <span id="userEmail"></span>
+                </div>
+                <div class="dropdownMenu">
+                    <div class="dropdownItem">
+                        <strong id="userName"></strong>
+                    </div>
+                    <hr style="margin: 0.5rem 0; border: none; border-top: 1px solid #444;">
+                    <button id="logoutBtn" class="dropdownItem logoutBtn">Log Out</button>
+                </div>
+            </div>
         </div>
     </nav>
 

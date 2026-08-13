@@ -13,7 +13,7 @@ body {
 
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 1rem 2rem;
     background-color: #1a1a1a;
@@ -21,6 +21,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    gap: 1rem;
 }
 
 .navbrand {
@@ -31,6 +32,7 @@ body {
     color: #ff6b35;
     text-transform: uppercase;
     letter-spacing: 2px;
+    flex-shrink: 0;
 }
 
 .navLogo {
@@ -38,22 +40,45 @@ body {
     margin-right: 10px;
 }
 
-.navlinks a, .navlinks button {
-    color: #f0f0f0;
-    text-decoration: none;
-    margin-left: 1.5rem;
-    font-size: 0.95rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
+.navlinks {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+.profileSection {
+    margin-left: 0.5rem;
     position: relative;
 }
 
-.cartBadge {
-    display: inline-block;
+.navBtn {
+    color: #f0f0f0;
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    background-color: #252525;
+    border: 2px solid #ff6b35;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navBtn:hover {
     background-color: #ff6b35;
-    color: white;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+}
+
+.cartBadge {
+    display: none;
+    background-color: #ffd700;
+    color: #1a1a1a;
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -65,6 +90,94 @@ body {
     position: absolute;
     top: -8px;
     right: -8px;
+}
+
+.userDropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownToggle {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: #f0f0f0;
+    cursor: pointer;
+    padding: 0.6rem 1.2rem;
+    background-color: #252525;
+    border: 2px solid #ff6b35;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.dropdownToggle:hover {
+    background-color: #ff6b35;
+    color: #1a1a1a;
+}
+
+.profileIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #252525;
+    border: 2px solid #ff6b35;
+    border-radius: 4px;
+    min-width: 200px;
+    margin-top: 5px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    display: none;
+    z-index: 1000;
+}
+
+.userDropdown:hover .dropdownMenu,
+.dropdownToggle:focus + .dropdownMenu {
+    display: block;
+}
+
+.userDropdown:hover .dropdownMenu {
+    display: block;
+}
+
+.dropdownItem {
+    padding: 1rem 1.5rem;
+    color: #f0f0f0;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+}
+
+.dropdownItem:hover {
+    background-color: #333;
+}
+
+.dropdownItem:first-child {
+    padding: 1rem 1.5rem;
+    color: #ff6b35;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.logoutBtn {
+    color: #ff6b35;
+    padding: 1rem 1.5rem;
+}
+
+.logoutBtn:hover {
+    background-color: #ff6b35;
+    color: #1a1a1a;
 }
 
 .navlinks a:hover, .navlinks button:hover {
