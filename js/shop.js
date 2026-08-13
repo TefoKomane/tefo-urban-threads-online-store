@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function addToCart(productId) {
         var user = auth.currentUser;
+        console.log("Adding to cart. Current user:", user);
         if(!user) {
             alert("Please log in to add items to your cart");
             window.location.href = "login.html";
@@ -58,14 +59,17 @@ document.addEventListener("DOMContentLoaded", function() {
         db.collection("products").doc(productId).get().then(function(doc) {
             if(!doc.exists) return;
             var product = doc.data();
+            console.log("Product found:", product);
             var cartRef = db.collection("users").doc(user.uid).collection("cart").doc(productId);
 
             return cartRef.get().then(function(cartDoc) {
                 if(cartDoc.exists) {
+                    console.log("Item already in cart, updating quantity");
                     return cartRef.update({
                         quantity: cartDoc.data().quantity + 1
                     });
                 } else {
+                    console.log("New item, adding to cart");
                     return cartRef.set({
                         name: product.name,
                         price: product.price,
@@ -86,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", function() {
             filterBtns.forEach(function(b) { b.classList.remove("active"); });
             this.classList.add("active");
-            loadProducts(this.getAttribute("data_category"));
+            loadProducts(this.getAttribute("data-category"));
         });
     });
 

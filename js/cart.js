@@ -13,12 +13,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function loadCart(userId) {
+        console.log("Loading cart for user:", userId);
         db.collection("users").doc(userId).collection("cart").get()
             .then(function(snapshot) {
+                console.log("Cart snapshot received. Empty:", snapshot.empty, "Size:", snapshot.size);
                 var tbody = cartTable.querySelector("tbody");
                 tbody.innerHTML = "";
 
                 if(snapshot.empty) {
+                    console.log("Cart is empty");
                     cartTable.style.display = "none";
                     emptyCart.style.display = "block";
                     cartTotal.textContent = "Total: $0.00";
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 var total = 0;
 
                 snapshot.forEach(function(doc) {
+                    console.log("Cart item:", doc.id, doc.data());
                     var item = doc.data();
                     total += item.price * item.quantity;
 
