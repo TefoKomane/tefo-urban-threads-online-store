@@ -462,6 +462,43 @@ th {
     letter-spacing: 1px;
 }
 
+.toastContainer {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 2000;
+}
+
+.toast {
+    min-width: 220px;
+    max-width: 320px;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    background: rgba(26, 26, 26, 0.96);
+    border: 1px solid #ff6b35;
+    color: #f0f0f0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.success {
+    border-color: #2ecc71;
+}
+
+.toast.error {
+    border-color: #e74c3c;
+}
+
 .cartSummary {
     text-align: right;
     margin-top: 2rem;

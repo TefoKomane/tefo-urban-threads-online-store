@@ -102,12 +102,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     });
                     return batch.commit();
                 }).then(function() {
-                    alert("Order placed successfully!");
+                    window.showToast && window.showToast("Order placed successfully!", "success");
                     if(window.updateCartCount) window.updateCartCount();
-                    window.location.href = "shop.html";
+                    setTimeout(function() {
+                        window.location.href = "shop.html";
+                    }, 1200);
                 }).catch(function(error) {
                     console.error("Error placing order:", error);
-                    alert("There was a problem placing your order. Please try again.");
+                    window.showToast && window.showToast("There was a problem placing your order. Please try again.", "error");
                 });
             });
         });

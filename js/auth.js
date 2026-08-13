@@ -1,4 +1,27 @@
 document.addEventListener("DOMContentLoaded", function() {
+    var toastContainer = document.createElement("div");
+    toastContainer.id = "toastContainer";
+    toastContainer.className = "toastContainer";
+    document.body.appendChild(toastContainer);
+
+    window.showToast = function(message, type) {
+        var toast = document.createElement("div");
+        toast.className = "toast " + (type || "success");
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+
+        setTimeout(function() {
+            toast.classList.add("show");
+        }, 10);
+
+        setTimeout(function() {
+            toast.classList.remove("show");
+            setTimeout(function() {
+                toast.remove();
+            }, 300);
+        }, 2600);
+    };
+
     var loginForm = document.getElementById("loginForm");
     var signupForm = document.getElementById("signupForm");
     var authToggle = document.getElementById("authToggle");

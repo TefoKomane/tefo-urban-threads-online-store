@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var user = auth.currentUser;
         console.log("Adding to cart. Current user:", user);
         if(!user) {
-            alert("Please log in to add items to your cart");
+            window.showToast && window.showToast("Please log in to add items to your cart", "error");
             window.location.href = "login.html";
             return;
         }
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         }).then(function() {
-            alert("Item added to cart");
+            window.showToast && window.showToast("Item added to cart", "success");
             window.updateCartCount();
         }).catch(function(error) {
             console.error("Error adding to cart:", error);
