@@ -29,7 +29,10 @@ document.addEventListener("DOMContentLoaded", function() {
                         <h3>${product.name}</h3>
                         <p>${product.description}</p>
                         <div class="price">R${product.price.toFixed(2)}</div>
-                        <button class="btn addToCartBtn" data-id="${doc.id}">Add to Cart</button>
+                        <div class="detailActions">
+                            <button class="btn addToCartBtn" data-id="${doc.id}">Add to Cart</button>
+                            <a href="product.html?id=${doc.id}" class="secondaryBtn">View</a>
+                        </div>
                     </div>
                 `;
                 productGrid.appendChild(card);
