@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }).then(function() {
             alert("Item added to cart");
+            window.updateCartCount();
         }).catch(function(error) {
             console.error("Error adding to cart:", error);
         });

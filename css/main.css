@@ -47,6 +47,24 @@ body {
     border: none;
     cursor: pointer;
     font-family: inherit;
+    position: relative;
+}
+
+.cartBadge {
+    display: inline-block;
+    background-color: #ff6b35;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-left: 5px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
 }
 
 .navlinks a:hover, .navlinks button:hover {

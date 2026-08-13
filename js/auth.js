@@ -92,4 +92,32 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
+
+    // Function to update cart counter
+    window.updateCartCount = function() {
+        var user = auth.currentUser;
+        if(!user) {
+            var cartCount = document.getElementById("cartCount");
+            if(cartCount) cartCount.textContent = "0";
+            return;
+        }
+        
+        db.collection("users").doc(user.uid).collection("cart").get()
+            .then(function(snapshot) {
+                var count = snapshot.size;
+                var cartCount = document.getElementById("cartCount");
+                if(cartCount) {
+                    cartCount.textContent = count;
+                    cartCount.style.display = count > 0 ? "inline-block" : "none";
+                }
+            })
+            .catch(function(error) {
+                console.error("Error updating cart count:", error);
+            });
+    };
+
+    // Update cart count on page load
+    auth.onAuthStateChanged(function(user) {
+        window.updateCartCount();
+    });
 });

@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
             window.location.href = "login.html";
             return;
         }
+        window.updateCartCount();
         loadCart(user.uid);
     });
 
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function removeFromCart(userId, itemId) {
         db.collection("users").doc(userId).collection("cart").doc(itemId).delete()
             .then(function() {
+                window.updateCartCount();
                 loadCart(userId);
             })
             .catch(function(error) {
