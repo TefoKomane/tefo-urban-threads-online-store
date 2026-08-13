@@ -72,11 +72,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
             sortedProducts.forEach(function(item) {
                 var product = item.product;
+                var badgeText = product.badge || "";
                 var card = document.createElement("div");
                 card.className = "productCard";
                 card.innerHTML = `
                     <div class="productImageWrap">
                         <img src="${product.imageURL}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x400/333/fff?text=No+Image'">
+                        ${badgeText ? `<span class="productBadge">${badgeText}</span>` : ""}
                         <button class="wishlistBtn ${item.isFavorite ? 'active' : ''}" data-id="${item.id}" aria-label="Add to wishlist">
                             ${item.isFavorite ? '♥' : '♡'}
                         </button>

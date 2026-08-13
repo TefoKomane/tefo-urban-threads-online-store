@@ -269,6 +269,20 @@ body {
     object-fit: cover;
 }
 
+.productBadge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: #ff6b35;
+    color: #1a1a1a;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+}
+
 .wishlistBtn {
     position: absolute;
     top: 0.75rem;
