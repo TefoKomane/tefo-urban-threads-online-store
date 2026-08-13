@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if(checkoutBtn) {
         checkoutBtn.addEventListener("click", function() {
-            alert("Checkout feature coming soon. Thank you for shopping with Urban Threads.");
+            window.location.href = "checkout.html";
         });
     }
 });

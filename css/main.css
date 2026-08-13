@@ -472,6 +472,96 @@ th {
     font-size: 1.5rem;
 }
 
+.checkoutLayout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.checkoutPanel,
+.summaryPanel {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.checkoutPanel h2,
+.summaryPanel h2 {
+    margin-bottom: 1.5rem;
+}
+
+.checkoutForm {
+    display: grid;
+    gap: 1rem;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.checkoutForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #d0d0d0;
+}
+
+.checkoutForm input,
+.checkoutForm select {
+    width: 100%;
+    padding: 0.9rem;
+    background: #0f0f0f;
+    border: 1px solid #333;
+    color: #f0f0f0;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.checkoutForm input:focus,
+.checkoutForm select:focus {
+    outline: none;
+    border-color: #ff6b35;
+}
+
+.checkoutItems {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+}
+
+.checkoutItems li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #333;
+}
+
+.summaryLine {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.75rem 0;
+    color: #d0d0d0;
+}
+
+.summaryTotal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.placeOrderBtn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
 .footer {
     text-align: center;
     padding: 2rem;

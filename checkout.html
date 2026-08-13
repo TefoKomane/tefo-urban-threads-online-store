@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Urban Threads</title>
+    <link rel="icon" type="image/png" href="ut-favicon.png">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbrand">
+            <img src="images/ut-logo.png" alt="Urban Threads Logo" class="navLogo">
+        </div>
+        <div class="navlinks">
+            <a href="index.html" class="navBtn">Home</a>
+            <a href="shop.html" class="navBtn">Shop</a>
+            <a href="cart.html" id="cartLink" class="navBtn">Cart <span id="cartCount" class="cartBadge">0</span></a>
+            <a href="login.html" id="loginLink" class="navBtn">Log In</a>
+        </div>
+        <div class="profileSection">
+            <div id="userDropdown" class="userDropdown" style="display:none;">
+                <div class="dropdownToggle">
+                    <svg class="profileIcon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    <span id="userEmail"></span>
+                </div>
+                <div class="dropdownMenu">
+                    <div class="dropdownItem">
+                        <strong id="userName"></strong>
+                    </div>
+                    <hr style="margin: 0.5rem 0; border: none; border-top: 1px solid #444;">
+                    <button id="logoutBtn" class="dropdownItem logoutBtn">Log Out</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Checkout</h1>
+        <div class="checkoutLayout">
+            <section class="checkoutPanel">
+                <h2>Shipping Details</h2>
+                <form id="checkoutForm" class="checkoutForm">
+                    <div class="formRow">
+                        <div>
+                            <label for="firstName">First Name</label>
+                            <input id="firstName" type="text" required>
+                        </div>
+                        <div>
+                            <label for="lastName">Last Name</label>
+                            <input id="lastName" type="text" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="email">Email</label>
+                        <input id="email" type="email" required>
+                    </div>
+
+                    <div>
+                        <label for="address">Street Address</label>
+                        <input id="address" type="text" required>
+                    </div>
+
+                    <div class="formRow">
+                        <div>
+                            <label for="city">City</label>
+                            <input id="city" type="text" required>
+                        </div>
+                        <div>
+                            <label for="province">Province</label>
+                            <select id="province">
+                                <option>Gauteng</option>
+                                <option>Western Cape</option>
+                                <option>KwaZulu-Natal</option>
+                                <option>Eastern Cape</option>
+                                <option>Free State</option>
+                                <option>Limpopo</option>
+                                <option>Mpumalanga</option>
+                                <option>North West</option>
+                                <option>Northern Cape</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="postalCode">Postal Code</label>
+                        <input id="postalCode" type="text" required>
+                    </div>
+                </form>
+            </section>
+
+            <aside class="summaryPanel">
+                <h2>Order Summary</h2>
+                <ul id="checkoutItems" class="checkoutItems"></ul>
+                <div class="summaryLine"><span>Subtotal</span><span id="subtotal">R0.00</span></div>
+                <div class="summaryLine"><span>Delivery</span><span id="delivery">R90.00</span></div>
+                <div class="summaryLine"><span>Tax</span><span id="tax">R0.00</span></div>
+                <div class="summaryTotal"><span>Total</span><span id="orderTotal">R0.00</span></div>
+                <button id="placeOrderBtn" class="btn placeOrderBtn">Place Order</button>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Urban Threads 2026. Built by Tefo Karabo Komane</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase_config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>
