@@ -46,13 +46,27 @@ document.addEventListener("DOMContentLoaded", function() {
                         <td><img src="${item.imageURL}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;" onerror="this.src='https://via.placeholder.com/60/333/fff?text=No+Image'"></td>
                         <td>${item.name}</td>
                         <td>R${item.price.toFixed(2)}</td>
-                        <td>${item.quantity}</td>
+                        <td>
+                            <div class="qtyControls">
+                                <button class="qtyBtn minusBtn" data-id="${doc.id}">-</button>
+                                <span class="qtyValue">${item.quantity}</span>
+                                <button class="qtyBtn plusBtn" data-id="${doc.id}">+</button>
+                            </div>
+                        </td>
                         <td>R${(item.price * item.quantity).toFixed(2)}</td>
                         <td><button class="btn removeBtn" style="padding:0.4rem 0.8rem;font-size:0.85rem;">Remove</button></td>
                     `;
 
                     row.querySelector(".removeBtn").addEventListener("click", function() {
                         removeFromCart(userId, doc.id);
+                    });
+
+                    row.querySelector(".minusBtn").addEventListener("click", function() {
+                        updateQuantity(userId, doc.id, -1);
+                    });
+
+                    row.querySelector(".plusBtn").addEventListener("click", function() {
+                        updateQuantity(userId, doc.id, 1);
                     });
 
                     tbody.appendChild(row);
@@ -74,6 +88,28 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(function(error) {
                 console.error("Error removing item:", error);
             });
+    }
+
+    function updateQuantity(userId, itemId, change) {
+        var cartItemRef = db.collection("users").doc(userId).collection("cart").doc(itemId);
+
+        cartItemRef.get().then(function(doc) {
+            if(!doc.exists) return;
+
+            var currentQty = doc.data().quantity || 0;
+            var newQty = currentQty + change;
+
+            if(newQty <= 0) {
+                return cartItemRef.delete();
+            }
+
+            return cartItemRef.update({ quantity: newQty });
+        }).then(function() {
+            window.updateCartCount();
+            loadCart(userId);
+        }).catch(function(error) {
+            console.error("Error updating quantity:", error);
+        });
     }
 
     if(checkoutBtn) {

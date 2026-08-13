@@ -499,6 +499,39 @@ th {
     border-color: #e74c3c;
 }
 
+.qtyControls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 0.2rem 0.5rem;
+    background: #0f0f0f;
+}
+
+.qtyBtn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #ff6b35;
+    background: transparent;
+    color: #f0f0f0;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.qtyBtn:hover {
+    background: #ff6b35;
+    color: #1a1a1a;
+}
+
+.qtyValue {
+    min-width: 22px;
+    text-align: center;
+    font-weight: bold;
+}
+
 .cartSummary {
     text-align: right;
     margin-top: 2rem;
