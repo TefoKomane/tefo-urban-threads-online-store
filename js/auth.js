@@ -179,7 +179,9 @@ document.addEventListener("DOMContentLoaded", function() {
         dropdownToggle.addEventListener("click", function(e) {
             e.stopPropagation();
             if(dropdownMenu) {
-                dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                var isOpen = dropdownMenu.style.display === "block";
+                dropdownMenu.style.display = isOpen ? "none" : "block";
+                dropdownToggle.closest(".userDropdown").classList.toggle("open", !isOpen);
             }
         });
     }
@@ -188,8 +190,19 @@ document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener("click", function(e) {
         if(!e.target.closest(".userDropdown")) {
             if(dropdownMenu) dropdownMenu.style.display = "none";
+            var userDropdownOpen = document.querySelector(".userDropdown.open");
+            if(userDropdownOpen) userDropdownOpen.classList.remove("open");
         }
     });
+
+    // Keep hover dropdown available for pointer-based users while preserving click support
+    var userDropdownWrapper = document.querySelector(".userDropdown");
+    if(userDropdownWrapper) {
+        userDropdownWrapper.addEventListener("mouseleave", function() {
+            if(dropdownMenu) dropdownMenu.style.display = "none";
+            userDropdownWrapper.classList.remove("open");
+        });
+    }
 
     // Update cart count on page load
     auth.onAuthStateChanged(function(user) {
