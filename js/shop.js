@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <div class="category">${product.category}</div>
                         <h3>${product.name}</h3>
                         <p>${product.description}</p>
-                        <div class="price">$${product.price.toFixed(2)}</div>
+                        <div class="price">R${product.price.toFixed(2)}</div>
                         <button class="btn addToCartBtn" data-id="${doc.id}">Add to Cart</button>
                     </div>
                 `;

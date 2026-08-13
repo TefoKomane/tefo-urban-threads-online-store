@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.log("Cart is empty");
                     cartTable.style.display = "none";
                     emptyCart.style.display = "block";
-                    cartTotal.textContent = "Total: $0.00";
+                    cartTotal.textContent = "Total: R0.00";
                     if(checkoutBtn) checkoutBtn.style.display = "none";
                     return;
                 }
@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     row.innerHTML = `
                         <td><img src="${item.imageURL}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;" onerror="this.src='https://via.placeholder.com/60/333/fff?text=No+Image'"></td>
                         <td>${item.name}</td>
-                        <td>$${item.price.toFixed(2)}</td>
+                        <td>R${item.price.toFixed(2)}</td>
                         <td>${item.quantity}</td>
-                        <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                        <td>R${(item.price * item.quantity).toFixed(2)}</td>
                         <td><button class="btn removeBtn" style="padding:0.4rem 0.8rem;font-size:0.85rem;">Remove</button></td>
                     `;
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     tbody.appendChild(row);
                 });
 
-                cartTotal.textContent = "Total: $" + total.toFixed(2);
+                cartTotal.textContent = "Total: R" + total.toFixed(2);
             })
             .catch(function(error) {
                 console.error("Error loading cart:", error);

@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="productInfo">
                         <div class="category">${product.category}</div>
                         <h3>${product.name}</h3>
-                        <div class="price">$${product.price.toFixed(2)}</div>
+                        <div class="price">R${product.price.toFixed(2)}</div>
                         <a href="shop.html" class="btn">View in Shop</a>
                     </div>
                 `;
