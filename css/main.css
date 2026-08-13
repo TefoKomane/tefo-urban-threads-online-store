@@ -380,7 +380,15 @@ body {
     border-color: #ff6b35;
 }
 
-.searchInput {
+.shopTools {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.searchInput,
+.sortSelect {
     min-width: 220px;
     max-width: 320px;
     width: 100%;
@@ -392,7 +400,8 @@ body {
     font-family: inherit;
 }
 
-.searchInput:focus {
+.searchInput:focus,
+.sortSelect:focus {
     outline: none;
     border-color: #ff6b35;
 }

@@ -47,7 +47,15 @@
                 <button class="filterBtn" data-category="Sneakers">Sneakers</button>
                 <button class="filterBtn" data-category="Accessories">Accessories</button>
             </div>
-            <input id="productSearch" class="searchInput" type="text" placeholder="Search products..." aria-label="Search products">
+            <div class="shopTools">
+                <input id="productSearch" class="searchInput" type="text" placeholder="Search products..." aria-label="Search products">
+                <select id="sortProducts" class="sortSelect" aria-label="Sort products">
+                    <option value="featured">Featured</option>
+                    <option value="newest">Newest</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </div>
         </div>
         <div id="productGrid" class="productGrid"></div>
     </main>

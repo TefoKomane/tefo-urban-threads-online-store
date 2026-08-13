@@ -2,7 +2,31 @@ document.addEventListener("DOMContentLoaded", function() {
     var productGrid = document.getElementById("productGrid");
     var filterBtns = document.querySelectorAll(".filterBtn");
     var searchInput = document.getElementById("productSearch");
+    var sortSelect = document.getElementById("sortProducts");
     var activeCategory = "all";
+    var activeSort = "featured";
+
+    function sortProducts(list, sortBy) {
+        var sorted = list.slice();
+
+        if(sortBy === "newest") {
+            sorted.sort(function(a, b) {
+                var aDate = a.product.createdAt && a.product.createdAt.seconds ? a.product.createdAt.seconds : 0;
+                var bDate = b.product.createdAt && b.product.createdAt.seconds ? b.product.createdAt.seconds : 0;
+                return bDate - aDate;
+            });
+        } else if(sortBy === "price-low") {
+            sorted.sort(function(a, b) {
+                return Number(a.product.price) - Number(b.product.price);
+            });
+        } else if(sortBy === "price-high") {
+            sorted.sort(function(a, b) {
+                return Number(b.product.price) - Number(a.product.price);
+            });
+        }
+
+        return sorted;
+    }
 
     function loadProducts(category, searchTerm) {
         productGrid.innerHTML = "<p>Loading products...</p>";
@@ -32,7 +56,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            filteredProducts.forEach(function(item) {
+            var sortedProducts = sortProducts(filteredProducts, activeSort);
+
+            sortedProducts.forEach(function(item) {
                 var product = item.product;
                 var card = document.createElement("div");
                 card.className = "productCard";
@@ -116,6 +142,13 @@ document.addEventListener("DOMContentLoaded", function() {
     if(searchInput) {
         searchInput.addEventListener("input", function() {
             loadProducts(activeCategory, this.value.trim().toLowerCase());
+        });
+    }
+
+    if(sortSelect) {
+        sortSelect.addEventListener("change", function() {
+            activeSort = this.value;
+            loadProducts(activeCategory, searchInput.value.trim().toLowerCase());
         });
     }
 
