@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     var productGrid = document.getElementById("productGrid");
     var filterBtns = document.querySelectorAll(".filterBtn");
+    var searchInput = document.getElementById("productSearch");
+    var activeCategory = "all";
 
-    function loadProducts(category) {
+    function loadProducts(category, searchTerm) {
         productGrid.innerHTML = "<p>Loading products...</p>";
 
         var query = db.collection("products");
@@ -13,13 +15,25 @@ document.addEventListener("DOMContentLoaded", function() {
         query.get().then(function(snapshot) {
             productGrid.innerHTML = "";
 
-            if(snapshot.empty) {
+            var filteredProducts = [];
+            snapshot.forEach(function(doc) {
+                var product = doc.data();
+                var matchesSearch = !searchTerm ||
+                    (product.name && product.name.toLowerCase().includes(searchTerm)) ||
+                    (product.description && product.description.toLowerCase().includes(searchTerm));
+
+                if(matchesSearch) {
+                    filteredProducts.push({ id: doc.id, product: product });
+                }
+            });
+
+            if(filteredProducts.length === 0) {
                 productGrid.innerHTML = "<p>No products found.</p>";
                 return;
             }
 
-            snapshot.forEach(function(doc) {
-                var product = doc.data();
+            filteredProducts.forEach(function(item) {
+                var product = item.product;
                 var card = document.createElement("div");
                 card.className = "productCard";
                 card.innerHTML = `
@@ -30,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         <p>${product.description}</p>
                         <div class="price">R${product.price.toFixed(2)}</div>
                         <div class="detailActions">
-                            <button class="btn addToCartBtn" data-id="${doc.id}">Add to Cart</button>
-                            <a href="product.html?id=${doc.id}" class="secondaryBtn">View</a>
+                            <button class="btn addToCartBtn" data-id="${item.id}">Add to Cart</button>
+                            <a href="product.html?id=${item.id}" class="secondaryBtn">View</a>
                         </div>
                     </div>
                 `;
@@ -94,9 +108,16 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", function() {
             filterBtns.forEach(function(b) { b.classList.remove("active"); });
             this.classList.add("active");
-            loadProducts(this.getAttribute("data-category"));
+            activeCategory = this.getAttribute("data-category");
+            loadProducts(activeCategory, searchInput.value.trim().toLowerCase());
         });
     });
 
-    loadProducts("all");
+    if(searchInput) {
+        searchInput.addEventListener("input", function() {
+            loadProducts(activeCategory, this.value.trim().toLowerCase());
+        });
+    }
+
+    loadProducts(activeCategory, "");
 });

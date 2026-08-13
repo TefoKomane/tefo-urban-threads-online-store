@@ -39,12 +39,15 @@
 
     <main class="container">
         <h1>Shop</h1>
-        <div class="filters">
-            <button class="filterBtn active" data-category="all">All</button>
-            <button class="filterBtn" data-category="Hoodies">Hoodies</button>
-            <button class="filterBtn" data-category="T-shirts">T-shirts</button>
-            <button class="filterBtn" data-category="Sneakers">Sneakers</button>
-            <button class="filterBtn" data-category="Accessories">Accessories</button>
+        <div class="shopControls">
+            <div class="filters">
+                <button class="filterBtn active" data-category="all">All</button>
+                <button class="filterBtn" data-category="Hoodies">Hoodies</button>
+                <button class="filterBtn" data-category="T-shirts">T-shirts</button>
+                <button class="filterBtn" data-category="Sneakers">Sneakers</button>
+                <button class="filterBtn" data-category="Accessories">Accessories</button>
+            </div>
+            <input id="productSearch" class="searchInput" type="text" placeholder="Search products..." aria-label="Search products">
         </div>
         <div id="productGrid" class="productGrid"></div>
     </main>
