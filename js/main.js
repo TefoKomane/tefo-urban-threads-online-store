@@ -2,6 +2,13 @@ document.addEventListener("DOMContentLoaded", function() {
     var featuredGrid = document.getElementById("featuredGrid");
 
     if(featuredGrid) {
+        featuredGrid.innerHTML = `
+            <div class="loadingState">
+                <div class="spinner"></div>
+                <p>Loading featured drops...</p>
+            </div>
+        `;
+
         db.collection("products").limit(4).get().then(function(snapshot) {
             featuredGrid.innerHTML = "";
 

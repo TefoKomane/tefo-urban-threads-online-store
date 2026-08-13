@@ -29,7 +29,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function loadProducts(category, searchTerm) {
-        productGrid.innerHTML = "<p>Loading products...</p>";
+        productGrid.innerHTML = `
+            <div class="loadingState">
+                <div class="spinner"></div>
+                <p>Loading products...</p>
+            </div>
+        `;
 
         var user = auth.currentUser;
         var wishlistPromise = user ? db.collection("users").doc(user.uid).collection("wishlist").get() : Promise.resolve({ docs: [] });

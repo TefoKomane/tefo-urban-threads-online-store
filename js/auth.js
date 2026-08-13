@@ -96,6 +96,20 @@ document.addEventListener("DOMContentLoaded", function() {
     var userDropdown = document.getElementById("userDropdown");
     var userEmail = document.getElementById("userEmail");
     var userName = document.getElementById("userName");
+    var mobileMenuToggle = document.querySelector(".mobileMenuToggle");
+    var navbar = document.querySelector(".navbar");
+
+    if(mobileMenuToggle && navbar) {
+        mobileMenuToggle.addEventListener("click", function() {
+            navbar.classList.toggle("navOpen");
+        });
+    }
+
+    document.addEventListener("click", function(e) {
+        if(window.innerWidth <= 820 && navbar && !e.target.closest(".navbar")) {
+            navbar.classList.remove("navOpen");
+        }
+    });
 
     auth.onAuthStateChanged(function(user) {
         if(user) {
